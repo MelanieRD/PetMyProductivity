@@ -1,0 +1,77 @@
+#taskContainer {
+  width: 300px;
+  height: 400px;
+  border: 10px double #7c3c19;
+  padding: 20px;
+  right: 30px;
+  position: absolute;
+  border-radius: 30px;
+
+  background-color: bisque;
+  text-align: center;
+
+  transition: transform 0.3s ease;
+}
+
+.toggle-button {
+  background-color: bisque;
+  border: #702801 double 10px;
+  border-radius: 30px;
+  position: absolute;
+  left: -32px;
+
+  font-weight: 900;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.toggle-button:hover {
+  background-color: rgb(209, 183, 151);
+  border: #702801 double 10px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+/* Para ocultar y des ocultar */
+.taskContainer.hidden {
+  transform: translateX(100%);
+}
+.taskContainer.visibleX {
+  transform: translate(-90%);
+}
+
+.taskContainer h2 {
+  color: #702801;
+}
+
+.taskList {
+  height: 270px;
+  width: 270;
+  overflow: auto;
+}
+
+.taskBotons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.taskBotons a {
+  text-decoration: none;
+  text-align: center;
+  color: #7c3c19;
+}
+
+.taskB {
+  flex: 1;
+  margin: 10px;
+  width: 70px;
+  background-color: antiquewhite;
+  border: rgb(228, 190, 141) 3px solid;
+  padding: 2px;
+  border-radius: 20px;
+}
+
+.taskB:hover {
+  background-color: rgb(250, 198, 168);
+  border: rgb(212, 154, 120) 3px solid;
+}

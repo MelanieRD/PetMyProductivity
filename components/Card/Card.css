@@ -1,0 +1,34 @@
+#Card {
+  box-sizing: border-box;
+  width: 350px;
+  height: 150px;
+  margin: 30px;
+  border: 10px double #7c3c19;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  border-radius: 80px;
+  background-color: #e4a476;
+}
+
+.imgCard {
+  /* background-color: aqua; */
+  width: 50%;
+}
+
+.contentCard {
+  /* background-color: blueviolet; */
+  display: flex;
+}
+
+.imgCard img {
+  width: 150px;
+  border-radius: 80px;
+}
+
+.txtCard {
+  padding: 15px;
+  line-height: 7px;
+  width: 50%;
+}

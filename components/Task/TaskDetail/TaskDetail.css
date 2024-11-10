@@ -1,0 +1,19 @@
+.Task {
+  color: rgb(82, 73, 73);
+
+  line-height: 0px;
+
+  text-align: justify;
+  display: flex;
+
+  margin: 10px;
+  padding-top: 10px;
+}
+
+.infoTask {
+  flex: 3;
+}
+
+.infoCoin {
+  flex: 1;
+}
