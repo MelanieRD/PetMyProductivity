@@ -74,4 +74,5 @@
 .taskB:hover {
   background-color: rgb(250, 198, 168);
   border: rgb(212, 154, 120) 3px solid;
+  cursor: pointer;
 }

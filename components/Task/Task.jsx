@@ -29,16 +29,11 @@ export const Task = () => {
         </div>
 
         <div className="taskBotons">
-          <a href="">
-            <div className="Add taskB">Add</div>
-          </a>
-          <a href="">
-            <div className="Modify taskB">Modify</div>
-          </a>
-          <a href="">
-            {" "}
-            <div className="Delete taskB">Delete</div>
-          </a>
+          <div className="Add taskB">Add</div>
+
+          <div className="Modify taskB">Modify</div>
+
+          <div className="Delete taskB">Delete</div>
         </div>
       </div>
     </>

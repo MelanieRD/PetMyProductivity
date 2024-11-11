@@ -1,8 +1,10 @@
+import { Outlet, Link } from "react-router-dom";
 import "./Menu.css";
 
 export const Menu = () => {
   return (
     <>
+      <Outlet />
       <div className="dropdown-container">
         <ul className="dropdown">
           <li className="dropdown-item">
@@ -11,13 +13,16 @@ export const Menu = () => {
               <li>Inventory Items here</li>
             </ul>
           </li>
-
-          <li className="dropdown-item">Shop</li>
+          <Link to="/Shop">
+            <li className="dropdown-item">Shop</li>
+          </Link>
 
           <li className="dropdown-item">Customize</li>
 
           <li className="dropdown-item">Calendar</li>
         </ul>
+
+        {/* Renderiza la current ruta seeleccionada */}
       </div>
     </>
   );

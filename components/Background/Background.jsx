@@ -1,12 +1,10 @@
 import { useEffect } from "react";
+import { useCanvas } from "../../src/hooks/useCanvas";
 
 export const Background = ({ canvasR }) => {
-  useEffect(() => {
-    const canvas = canvasR.current;
-    if (canvas) {
-      const ctx = canvas.getContext("2d");
-    }
-  }, []);
+  useCanvas(canvasR, (canvas, ctx) => {
+    // Okey
+  });
 
   return <></>;
 };
