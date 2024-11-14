@@ -1,0 +1,17 @@
+label {
+  font-size: 50px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+input {
+  font-size: 50px;
+  border: solid 1px #7c3c19;
+  border-radius: 30px;
+  padding: 15px;
+  margin: 5px;
+
+  width: 850px;
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  color: rgb(235, 78, 174);
+}

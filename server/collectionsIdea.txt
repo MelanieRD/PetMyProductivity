@@ -1,0 +1,111 @@
+
+{"The One that im going to use to try":
+
+{
+    "user": 1,
+    "Coins": 0,
+
+    "Room": {
+      "Wall": "default",
+      "Floor": "default",
+      "Curtains": "default",
+      "View": "default"    
+    },
+  
+    "Items_Unlocked":{
+  
+    },
+  
+    "Pet": {
+  
+      "PetName": "Pato the cat",
+      "Pet_Level:": 0,
+      "Pet_Experience":0,
+  
+      "Needs":{
+          "Hungry":0,
+      }
+  
+  },
+   
+"Task":{}
+
+}
+
+
+
+
+  {"Tasks Collection"},
+
+
+  "Task":{
+"ID": 0,
+"userTask":1,
+"Title":"",
+"Description":"",
+"state":"",
+"date":"",
+"ChatGpt_IA_Steps":{
+
+        "step1":{"id":0, "title":"", "desc":""},
+        "step2":{"id":1, "title":"", "desc":""},
+        "step3":{"id":3, "title":"", "desc":""}
+}
+
+},
+
+
+
+
+
+
+{"THIS IS THE USER STRUCURE THAT I WANT TO DO":0},
+
+{
+  "user": 1,
+  "Coins": 30,
+  
+
+
+  
+  "Room": {
+    "Wall": "red",
+    "Floor": "",
+    "Curtains": "",
+    "View": "",
+
+    "Furniture": {
+      "Item1": "",
+      "Item2": "",
+      "Item3": ""
+    },
+
+
+    
+  },
+
+  "Items_Unlocked":{
+
+  },
+
+  "Pet": {
+
+    "PetName": "Pato the cat",
+    "Pet_Level:": 10,
+    "Pet_Experience":300,
+
+    "Needs":{
+        "Hungry":0,
+        "Love":0,
+        "Dirty":0
+    },
+
+   "Style": {
+         "Type": "",
+          "Eyes": "",
+          "Mouth": "",
+          "Color1": "",
+          "Color2": "",
+          "Color3": ""}
+  }
+}

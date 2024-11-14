@@ -1,0 +1,15 @@
+.Btn {
+  font-size: 40px;
+  font-weight: bolder;
+  padding: 20px;
+  margin: 20px;
+
+  border-radius: 30px;
+  border: solid 5px rgb(189, 53, 155);
+  background-color: rgb(235, 78, 174);
+  cursor: pointer;
+}
+
+.Btn:hover {
+  background-color: rgb(238, 116, 191);
+}
