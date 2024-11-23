@@ -1,1 +1,0 @@
-mongodb+srv://MelanieRD:coco1234@melycoconut.akc53.mongodb.net/?retryWrites=true&w=majority&appName=MelyCoconut
