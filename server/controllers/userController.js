@@ -1,8 +1,8 @@
-const getUsers = (res, req) => {
+const getUsers = (req, res) => {
   res.send("Hellooooww");
 };
 
-const getUsersById = (res, req) => {
+const getUsersById = (req, res) => {
   res.send("Hellooooow by ID");
 };
 

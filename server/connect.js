@@ -3,7 +3,7 @@ const app = express();
 const PORT = 3000;
 
 const router = require("./routes");
-app.use("/", router);
+app.use("/app", router);
 
 app.listen(PORT, () => {
   console.log("Listening server");
