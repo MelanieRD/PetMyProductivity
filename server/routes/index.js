@@ -13,4 +13,12 @@ router.use("/pets", petsRoute);
 const itemsRoute = require("./itemsRoute");
 router.use("/items", itemsRoute);
 
+//Task
+const taskRoute = require("./tasksRoute");
+router.use("/tasks", taskRoute);
+
+//Counter
+const counterRoute = require("./counterRoute");
+router.use("/counter", counterRoute);
+
 module.exports = router;
