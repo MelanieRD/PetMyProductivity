@@ -9,6 +9,7 @@ import { GameShop } from "./pages/GameShop";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GameLogIn } from "./pages/GameLogIn";
 import { GameRegister } from "./pages/GameRegister";
+import { TokenGenerated } from "./pages/TokenGenerated";
 
 export default function Main() {
   return (
@@ -16,6 +17,8 @@ export default function Main() {
       <Routes>
         <Route path="/" element={<GameLogIn />} />
         <Route path="/Register" element={<GameRegister />} />
+        <Route path="/TokenGenerated/:Token" element={<TokenGenerated />} />
+
         <Route path="/Game" element={<GameCanvas />}>
           <Route path="Shop" element={<GameShop />} />
         </Route>

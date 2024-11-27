@@ -19,26 +19,6 @@ export const Shop = () => {
           <div className="item">Item</div>
           <div className="item">Item</div>
           <div className="item">Item</div>
-
-          <div className="item">Item</div>
-          <div className="item">Item</div>
-          <div className="item">Item</div>
-          <div className="item">Item</div>
-
-          <div className="item">Item</div>
-          <div className="item">Item</div>
-          <div className="item">Item</div>
-          <div className="item">Item</div>
-
-          <div className="item">Item</div>
-          <div className="item">Item</div>
-          <div className="item">Item</div>
-          <div className="item">Item</div>
-
-          <div className="item">Item</div>
-          <div className="item">Item</div>
-          <div className="item">Item</div>
-          <div className="item">Item</div>
         </div>
 
         <div className="listNavigation">1.. 2.. 3..</div>

@@ -16,6 +16,8 @@ export const handleCreateNewPet = async (newUser) => {
 
     const data = await response.json();
     console.log("Mascota creada:", data);
+
+    return true;
   } catch (error) {
     console.error("error  al crear mascota" + error);
   }

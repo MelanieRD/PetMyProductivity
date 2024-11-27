@@ -12,7 +12,7 @@ export const Card = () => {
           <div className="txtCard">
             <h2>Pato the Cat</h2>
             <h3>Lvl. 30</h3>
-            <input type="range" />
+            <input id="expInput" type="range" />
           </div>
         </div>
       </div>

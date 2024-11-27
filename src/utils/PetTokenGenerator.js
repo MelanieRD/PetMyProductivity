@@ -1,5 +1,4 @@
 // const { getCounter, putCounter } = require("../../server/controllers/counterController");
-import { getCounter, putCounter } from "../../server/controllers/counterController";
 
 const letters = "ABCDEFGHIJKLMNOPRSTUVXT";
 let result = [];
@@ -7,7 +6,9 @@ let counter;
 
 const loadCounter = async () => {
   try {
-    counter = await getCounter();
+    const response = await fetch("http://localhost:3000/app/counter");
+    const data = await response.json();
+    counter = data[0].counter;
   } catch (error) {
     console.error("Counter Error LoadCounter PetTokenGenerator", error);
   }
@@ -15,14 +16,19 @@ const loadCounter = async () => {
 
 const saveCounter = async () => {
   try {
-    const counterPlusOne = await putCounter();
-    console.log("Nuevo valor del counter: " + counterPlusOne);
+    const response = await fetch("http://localhost:3000/app/counter", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json", //Indicando que es un JSON
+      },
+    });
   } catch (error) {
     console.error("Counter Error SaveCounter PetTokenGenerator", error);
   }
 };
 
 export const petTokenGenerator = async () => {
+  result = [];
   await loadCounter();
   console.log("counter en pet " + counter);
 
@@ -37,8 +43,8 @@ export const petTokenGenerator = async () => {
   await saveCounter();
   result.push(counter);
 
-  console.log(result.join("")); // QUITAR ESTO AHORITA
-  return result.join();
+  const token = result.join(""); // QUITAR ESTO AHORITA
+  return token;
 };
 
 const randomLetter = () => {

@@ -1,6 +1,6 @@
 class User {
-  constructor(petName) {
-    this.user = 1;
+  constructor(petName, token) {
+    this._id = token;
     this.coins = 0;
 
     this.tasks = {};

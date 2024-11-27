@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import "./Menu.css";
 
 export const Menu = () => {
@@ -13,7 +13,7 @@ export const Menu = () => {
               <li>Inventory Items here</li>
             </ul>
           </li>
-          <Link to="/Shop">
+          <Link to="Shop">
             <li className="dropdown-item">Shop</li>
           </Link>
 

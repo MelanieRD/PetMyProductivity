@@ -1,21 +1,25 @@
 import { Button } from "../../components/Button/Button";
 import { TextInput } from "../../components/TextInput/TextInput";
 import { Window } from "../../components/Window/Window";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { handleCreateNewPet } from "../utils/utils";
 import { useRef, useState } from "react";
 import User from "../../server/classes/User";
 import { petTokenGenerator } from "../utils/PetTokenGenerator";
 
 export const GameRegister = () => {
+  const navigate = useNavigate();
   const petNameValue = useRef("null");
 
-  function handlePetName() {
-    const newUser = new User(petNameValue.current.value);
-    const token = petTokenGenerator();
-    console.log(token);
-    handleCreateNewPet(newUser);
-  }
+  const handlePetName = async () => {
+    const token = await petTokenGenerator();
+    console.log("este es el token: " + token);
+    const newUser = new User(petNameValue.current.value, token);
+    const created = await handleCreateNewPet(newUser);
+    if (created) {
+      navigate("/TokenGenerated/" + token);
+    }
+  };
 
   return (
     <>
