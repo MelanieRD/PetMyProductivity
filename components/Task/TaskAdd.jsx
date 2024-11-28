@@ -1,9 +1,8 @@
 import { useState } from "react";
 import "./Task.css";
 import { TaskDetail } from "./TaskDetail/TaskDetail";
-import { Link } from "react-router-dom";
 
-export const Task = () => {
+export const TaskAdd = () => {
   const [isVisible, setisVisible] = useState(false);
 
   const togglePanel = () => {
@@ -32,26 +31,23 @@ export const Task = () => {
             {isVisible ? ">" : "<"}
           </div>
 
-          <h2>Today Tasks</h2>
+          <h2>Add new Task</h2>
         </div>
 
-        <div className="taskList">
-          <TaskDetail />
-        </div>
+        <div className="taskList">HERE GOES THE FORM</div>
 
         <hr />
         <div className="taskBotons">
-          <Link to="TaskAdd">
-            <div className="Add taskB" onClick={handleAdd}>
-              Add
-            </div>
-          </Link>
+          <div className="Add taskB" onClick={handleAdd}>
+            Add
+          </div>
+
           <div className="Modify taskB" onClick={handleModify}>
-            Modify
+            Add another
           </div>
 
           <div className="Delete taskB" onClick={handleDelete}>
-            Delete
+            Cancel
           </div>
         </div>
       </div>

@@ -10,6 +10,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GameLogIn } from "./pages/GameLogIn";
 import { GameRegister } from "./pages/GameRegister";
 import { TokenGenerated } from "./pages/TokenGenerated";
+import { TaskAdd } from "../components/Task/TaskAdd";
 
 export default function Main() {
   return (
@@ -21,6 +22,7 @@ export default function Main() {
 
         <Route path="/Game" element={<GameCanvas />}>
           <Route path="Shop" element={<GameShop />} />
+          <Route path="TaskAdd" element={<TaskAdd />} />
         </Route>
       </Routes>
     </BrowserRouter>

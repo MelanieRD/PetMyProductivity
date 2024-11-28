@@ -1,6 +1,6 @@
 #taskContainer {
   width: 300px;
-  height: 400px;
+  height: 550px;
   border: 10px double #7c3c19;
   padding: 20px;
   right: 30px;
@@ -45,7 +45,7 @@
 }
 
 .taskList {
-  height: 270px;
+  height: 430px;
   width: 270;
   overflow: auto;
 }
