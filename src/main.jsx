@@ -12,6 +12,9 @@ import { GameRegister } from "./pages/GameRegister";
 import { TokenGenerated } from "./pages/TokenGenerated";
 import { TaskAdd } from "../components/Task/TaskAdd";
 
+import "@fortawesome/fontawesome-free/css/all.min.css";
+//npm install @fortawesome/fontawesome-free
+
 export default function Main() {
   return (
     <BrowserRouter>

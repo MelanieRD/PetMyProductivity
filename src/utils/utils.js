@@ -67,6 +67,39 @@ export const taskAdd = async (userID, updateAddTask) => {
   }
 };
 
+export const taskDelete = async (userID, taskID) => {
+  console.log("userID: ", userID);
+  console.log("taskID: ", taskID);
+  try {
+    const response = await fetch(`http://localhost:3000/app/tasks/${userID}/${taskID}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error("Error al delete task");
+    }
+
+    const data = await response.json();
+    console.log("Tarea deleted:", data);
+    return true;
+  } catch (error) {
+    console.error("error  al delete Tarea " + error);
+  }
+};
+
+export const getTaskList = async (token) => {
+  try {
+    const response = await fetch(`http://localhost:3000/app/tasks/${token}`);
+    if (!response.ok) {
+      throw new Error("Error al obtener las tareas");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error al obtener las tareas", error);
+  }
+};
+
 export const handlePetLogIng = () => {
   console.log("Pet Finded");
 };

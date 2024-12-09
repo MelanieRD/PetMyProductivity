@@ -1,6 +1,6 @@
 import "./TextInput.css";
 
-export const TextInput = ({ labelTxt, idTxt, pHolderTxt, nameTxt, refe, disabled, _width, _padding, _fontsize }) => {
+export const TextInput = ({ labelTxt, idTxt, pHolderTxt, nameTxt, refe, disabled, _width, _padding, _fontsize, maxLenght }) => {
   return (
     <>
       <label htmlFor={nameTxt}>{labelTxt}</label>
@@ -14,6 +14,7 @@ export const TextInput = ({ labelTxt, idTxt, pHolderTxt, nameTxt, refe, disabled
         placeholder={pHolderTxt}
         ref={refe}
         disabled={disabled !== null && disabled !== undefined}
+        maxLength={maxLenght}
       />
     </>
   );

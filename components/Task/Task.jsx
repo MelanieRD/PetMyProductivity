@@ -1,14 +1,25 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Task.css";
 import { TaskDetail } from "./TaskDetail/TaskDetail";
 import { Link, useNavigate } from "react-router-dom";
 import { TextInput } from "../TextInput/TextInput";
 import { TaskC } from "../../server/classes/TaskClass";
-import { taskAdd } from "../../src/utils/utils";
+import { getTaskList, taskAdd } from "../../src/utils/utils";
+import { use } from "react";
 
 export const Task = ({ token }) => {
   const [isVisible, setisVisible] = useState(false);
   const [addVisible, setAddVisible] = useState(true);
+  const [taskList, setTaskList] = useState([]);
+
+  useEffect(() => {
+    handleTaskList();
+  }, []);
+
+  const handleTaskList = async () => {
+    const data = await getTaskList(token);
+    setTaskList(data.tasks);
+  };
 
   const titleI = useRef("none");
   const descI = useRef("none");
@@ -29,6 +40,7 @@ export const Task = ({ token }) => {
           console.log("Tarea creada console del front");
         }
         console.log(newTask);
+        handleTaskList();
       } catch (error) {
         console.error("Error al crear la tarea", error);
       }
@@ -64,7 +76,9 @@ export const Task = ({ token }) => {
         {addVisible ? (
           <>
             <div className="taskList">
-              <TaskDetail />
+              {taskList.map((task, index) => (
+                <TaskDetail key={index} task={task} TokenUser={token} handleTaskList={handleTaskList} />
+              ))}
             </div>
             <hr />
             <div className="taskBotons">
@@ -84,7 +98,7 @@ export const Task = ({ token }) => {
         ) : (
           <>
             <div className="taskList">
-              <TextInput _width={250} _padding={4} _fontsize={20} pHolderTxt={"Titulo"} refe={titleI} />
+              <TextInput _width={250} _padding={4} _fontsize={20} pHolderTxt={"Titulo"} refe={titleI} maxLenght={20} />
               <TextInput _width={250} _padding={4} _fontsize={20} pHolderTxt={"Descripcion"} refe={descI} />
               <TextInput _width={250} _padding={4} _fontsize={20} pHolderTxt={"Prioridad"} refe={priorityI} />
 

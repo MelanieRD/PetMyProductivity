@@ -1,7 +1,6 @@
 class TasksC {
   constructor(userID) {
     this.userID = userID;
-    this.counterTask = 0;
     this.tasks = [];
   }
 }

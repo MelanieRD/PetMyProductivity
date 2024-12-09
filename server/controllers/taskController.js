@@ -72,10 +72,20 @@ const updateTask = async (req, res) => {
 const deleteTask = async (req, res) => {
   try {
     const db = await mongoDBConection();
-    const task = await db.collection("tasks").deleteOne({ _id: req.params.id });
-    res.status(200).send(task);
+    const userID = req.params.userID;
+    const taskID = parseInt(req.params.taskID);
+    const result = await db.collection("tasks").updateOne(
+      { userID: userID },
+      { $pull: { tasks: { _id: taskID } } } // Elimina la tarea con el ID especificado
+    );
+
+    if (result.modifiedCount === 0) {
+      return res.status(404).json({ error: "Tarea no encontrada" });
+    }
+    res.status(200).json({ message: "Tarea eliminada" });
   } catch (error) {
     console.error("Error al eliminar la tarea " + error);
+    res.status(500).json({ error: "Error al eliminar la tarea" });
   } finally {
     closeMongoDBconection();
   }
