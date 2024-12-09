@@ -2,10 +2,11 @@ import { Button } from "../../components/Button/Button";
 import { TextInput } from "../../components/TextInput/TextInput";
 import { Window } from "../../components/Window/Window";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { handleCreateNewPet } from "../utils/utils";
+import { handleCreateNewPet, taskCreate } from "../utils/utils";
 import { useRef, useState } from "react";
 import User from "../../server/classes/User";
 import { petTokenGenerator } from "../utils/PetTokenGenerator";
+import { TasksC } from "../../server/classes/TaskClass";
 
 export const GameRegister = () => {
   const navigate = useNavigate();
@@ -15,7 +16,10 @@ export const GameRegister = () => {
     const token = await petTokenGenerator();
     console.log("este es el token: " + token);
     const newUser = new User(petNameValue.current.value, token);
+    const newTaskRegistro = new TasksC(token);
+    console.log(newUser._id);
     const created = await handleCreateNewPet(newUser);
+    const tasksRegistered = await taskCreate(newTaskRegistro);
     if (created) {
       navigate("/TokenGenerated/" + token);
     }

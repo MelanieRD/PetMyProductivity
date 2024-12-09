@@ -7,11 +7,14 @@ import React from "react";
 import { UsePetAnimation } from "../Pet/UsePetAnimation";
 import { Menu } from "../menu/Menu";
 import { Card } from "../Card/Card";
-import { Task } from "../Task/task";
+import { Task } from "../Task/Task";
 import { Window } from "../Window/Window";
+import { useParams } from "react-router-dom";
 
 const GameCanvas = () => {
   const canvasRef = useRef(null);
+  const { Token } = useParams();
+  console.log("En la vista game, este es el token: " + Token);
 
   return (
     <>
@@ -22,7 +25,7 @@ const GameCanvas = () => {
           <Card />
 
           <canvas className="canvas1" ref={canvasRef}></canvas>
-          <Task />
+          <Task token={Token} />
 
           {/* Window shop, customize, calendar, and more, I guess idk */}
 

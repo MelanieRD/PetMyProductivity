@@ -20,7 +20,7 @@ export default function Main() {
         <Route path="/Register" element={<GameRegister />} />
         <Route path="/TokenGenerated/:Token" element={<TokenGenerated />} />
 
-        <Route path="/Game" element={<GameCanvas />}>
+        <Route path="/Game/:Token" element={<GameCanvas />}>
           <Route path="Shop" element={<GameShop />} />
           <Route path="TaskAdd" element={<TaskAdd />} />
         </Route>

@@ -18,7 +18,7 @@ export const TokenGenerated = () => {
               <Button
                 btnTxt={"Start"}
                 functionBtn={() => {
-                  useNavi("/Game");
+                  useNavi("/Game/" + Token);
                 }}
               />
             </div>

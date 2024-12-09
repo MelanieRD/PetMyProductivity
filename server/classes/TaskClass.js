@@ -1,12 +1,8 @@
 class TasksC {
-  constructor(ID, userID) {
-    this._id = ID;
+  constructor(userID) {
     this.userID = userID;
-    tasks = [];
-  }
-
-  updateCounter() {
-    this.counter = tasks.length;
+    this.counterTask = 0;
+    this.tasks = [];
   }
 }
 

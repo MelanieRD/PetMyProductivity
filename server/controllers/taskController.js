@@ -16,7 +16,7 @@ const getAllTasks = async (req, res) => {
 const getTaskById = async (req, res) => {
   try {
     const db = await mongoDBConection();
-    const task = await db.collection("tasks").findOne({ _id: req.params.id });
+    const task = await db.collection("tasks").findOne({ userID: req.params.id });
     res.status(200).send(task);
   } catch (error) {
     console.error("Error al obtener la tarea" + error);
@@ -38,12 +38,32 @@ const createTask = async (req, res) => {
 };
 
 const updateTask = async (req, res) => {
+  const db = await mongoDBConection();
+  const task = await db.collection("tasks").findOne({ userID: req.params.id });
   try {
-    const db = await mongoDBConection();
-    const task = await db.collection("tasks").updateOne({ _id: req.params.id }, { $set: req.body });
-    res.status(200).send(task);
+    const updateAddTask = req.body;
+
+    if (!task) {
+      throw new Error("userID is required");
+    }
+
+    try {
+      const counterT = await db.collection("tasks").findOneAndUpdate({ userID: req.params.id }, { $inc: { counter: 1 } }, { returnDocument: "after", upsert: true });
+      const counterValue = counterT.counter;
+      updateAddTask._id = counterValue;
+      const updateTaskCounterField = `task_${counterValue}`;
+      const taskC = await db.collection("tasks").updateOne({ userID: req.params.id }, { $push: { tasks: updateAddTask } });
+
+      // if (result.modifiedCount === 0) {
+      //   throw new Error("No se pudo encontrar Tarea del usuario" + userID);
+      // }
+
+      res.status(200).json({ message: "Tarea agregada", result: taskC });
+    } catch (error) {
+      console.error("Error al agregar la tarea " + error);
+    }
   } catch (error) {
-    console.error("Error al actualizar la tarea" + error);
+    console.error("Error al agregar la tareaaaaa " + error);
   } finally {
     closeMongoDBconection();
   }
@@ -55,7 +75,7 @@ const deleteTask = async (req, res) => {
     const task = await db.collection("tasks").deleteOne({ _id: req.params.id });
     res.status(200).send(task);
   } catch (error) {
-    console.error("Error al eliminar la tarea" + error);
+    console.error("Error al eliminar la tarea " + error);
   } finally {
     closeMongoDBconection();
   }

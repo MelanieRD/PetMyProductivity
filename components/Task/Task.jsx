@@ -4,8 +4,9 @@ import { TaskDetail } from "./TaskDetail/TaskDetail";
 import { Link, useNavigate } from "react-router-dom";
 import { TextInput } from "../TextInput/TextInput";
 import { TaskC } from "../../server/classes/TaskClass";
+import { taskAdd } from "../../src/utils/utils";
 
-export const Task = () => {
+export const Task = ({ token }) => {
   const [isVisible, setisVisible] = useState(false);
   const [addVisible, setAddVisible] = useState(true);
 
@@ -18,10 +19,15 @@ export const Task = () => {
     setisVisible(!isVisible);
   };
 
-  const handleAdd = () => {
+  const handleAdd = async () => {
+    console.log("Token en Task.jsx: " + token);
     if (!addVisible) {
       try {
         let newTask = new TaskC(0, titleI.current.value, descI.current.value, new Date(), new Date(), priorityI.current.value, "To Do");
+        const taskAdded = await taskAdd(token, newTask);
+        if (taskAdded) {
+          console.log("Tarea creada console del front");
+        }
         console.log(newTask);
       } catch (error) {
         console.error("Error al crear la tarea", error);
