@@ -30,6 +30,7 @@ const saveCounter = async () => {
 export const petTokenGenerator = async () => {
   result = [];
   await loadCounter();
+  console.log(counter);
   console.log("counter en pet " + counter);
 
   while (result.length <= 3) {

@@ -1,4 +1,4 @@
-class Tasks {
+class TasksC {
   constructor(ID, userID) {
     this._id = ID;
     this.userID = userID;
@@ -10,7 +10,7 @@ class Tasks {
   }
 }
 
-class Task {
+class TaskC {
   constructor(ID, title, description, creationDate, dueDate, priority, status) {
     this._id = ID;
     this.title = title;
@@ -20,9 +20,9 @@ class Task {
     this.priority = priority;
     this.status = status;
 
-    steps = [];
+    this.steps = [];
 
-    taskRewards = [
+    this.taskRewards = [
       {
         type: "XP",
         amount: 0,
@@ -43,7 +43,7 @@ class Task {
   }
 }
 
-class Step {
+class StepC {
   constructor(ID, description, status) {
     this._id = ID;
     this.description = description;
@@ -51,4 +51,4 @@ class Step {
   }
 }
 
-export { Tasks, Task, Step };
+export { TasksC, TaskC, StepC };

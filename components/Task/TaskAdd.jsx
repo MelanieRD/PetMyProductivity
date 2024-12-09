@@ -12,6 +12,10 @@ export const TaskAdd = () => {
 
   const handleAdd = () => {
     console.log("Adding uwuwuwu");
+
+    if (!TaskAdd) {
+      console.log("Agregado");
+    }
   };
 
   const handleModify = () => {
