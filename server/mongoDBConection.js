@@ -1,11 +1,13 @@
 //try
 const { MongoClient } = require("mongodb");
+require("dotenv").config();
 
 function tryConsole() {
   console.log("It works, so idk");
 }
 //MongoDB Conexion
-const URL = "mongodb+srv://MelanieRD:coco1234@melycoconut.akc53.mongodb.net/?retryWrites=true&w=majority&appName=MelyCoconut";
+const URL = process.env.MongoString;
+console.log(URL);
 const client = new MongoClient(URL);
 
 async function mongoDBConection() {

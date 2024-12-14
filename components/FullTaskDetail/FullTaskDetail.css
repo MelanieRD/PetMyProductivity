@@ -1,0 +1,11 @@
+/* Lo de mi otro componente de tienda  */
+
+.Sp {
+  width: 100%;
+  height: 100%;
+  /* border: black 3px solid; */
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

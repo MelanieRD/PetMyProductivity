@@ -1,12 +1,13 @@
+import { useEffect, useState } from "react";
 import { GameShop } from "../../src/pages/GameShop";
 import "./window.css";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
-export const Window = ({ content, route }) => {
+export const Window = ({ content, newRoute }) => {
   return (
     <>
       <div className="window" id="window">
-        <Link to={route}>
+        <Link to={newRoute}>
           <div className="windowBtn">
             <h2>X</h2>
           </div>{" "}

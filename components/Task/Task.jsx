@@ -86,13 +86,13 @@ export const Task = ({ token }) => {
                 Add
               </div>
 
-              <div className="Modify taskB" onClick={handleModify}>
+              {/* <div className="Modify taskB" onClick={handleModify}>
                 Modify
               </div>
 
               <div className="Delete taskB" onClick={handleDelete}>
                 Delete
-              </div>
+              </div> */}
             </div>{" "}
           </>
         ) : (

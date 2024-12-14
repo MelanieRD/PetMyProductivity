@@ -13,6 +13,7 @@ import { TokenGenerated } from "./pages/TokenGenerated";
 import { TaskAdd } from "../components/Task/TaskAdd";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { TaskDetailsView } from "./pages/TaskDetailsView";
 //npm install @fortawesome/fontawesome-free
 
 export default function Main() {
@@ -26,6 +27,7 @@ export default function Main() {
         <Route path="/Game/:Token" element={<GameCanvas />}>
           <Route path="Shop" element={<GameShop />} />
           <Route path="TaskAdd" element={<TaskAdd />} />
+          <Route path="Details/:idTask" element={<TaskDetailsView />} />
         </Route>
       </Routes>
     </BrowserRouter>
