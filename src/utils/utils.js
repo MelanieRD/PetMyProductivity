@@ -23,6 +23,27 @@ export const handleCreateNewPet = async (newUser) => {
   }
 };
 
+export const handlePetLogIng = async (token) => {
+  try {
+    const response = await fetch(`http://localhost:3000/app/users/login/${token}`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      console.log("Pet not found");
+      return null;
+    }
+    const data = await response.json();
+    console.log("Mascota obtenida:", data);
+  } catch (error) {
+    console.error("Error al obtener la mascota", error);
+  }
+};
+
 export const taskCreate = async (newTask) => {
   try {
     const response = await fetch("http://localhost:3000/app/tasks/0", {
@@ -98,8 +119,4 @@ export const getTaskList = async (token) => {
   } catch (error) {
     console.error("Error al obtener las tareas", error);
   }
-};
-
-export const handlePetLogIng = () => {
-  console.log("Pet Finded");
 };

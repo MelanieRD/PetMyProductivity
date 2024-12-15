@@ -11,10 +11,17 @@ import { Task } from "../Task/Task";
 import { Window } from "../Window/Window";
 import { useParams } from "react-router-dom";
 
-const GameCanvas = () => {
+const GameCanvas = ({ userData, token }) => {
+  //const { tokenT, setTokenT } = useContext(TokenContext);
+
   const canvasRef = useRef(null);
   const { Token } = useParams();
-  console.log("En la vista game, este es el token: " + Token);
+  console.log("En la vista game, este es el token: " + Token + "mandado por el parent con use context:" + JSON.stringify(userData));
+
+  // Acceder a petFindedToken desde userData
+  const petFindedToken = userData?.petFindedToken;
+  console.log("petFindedToken:", petFindedToken);
+  console.log("tokenUser:", token);
 
   return (
     <>

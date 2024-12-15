@@ -1,12 +1,17 @@
 const express = require("express");
 const app = express();
 const PORT = 3000;
+const cookieParser = require("cookie-parser");
 
 const cors = require("cors");
-app.use(cors());
-
+app.use(
+  cors({
+    origin: "http://localhost:5173", // URL del frontend
+    credentials: true, // Permite enviar cookies y headers como Authorization
+  })
+);
 app.use(express.json());
-
+app.use(cookieParser());
 //Haciendo uso de mis rutas UwU
 const router = require("./routes");
 app.use("/app", router);
