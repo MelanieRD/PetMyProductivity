@@ -16,6 +16,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { TaskDetailsView } from "./pages/TaskDetailsView";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import useAuth from "./hooks/useAuth";
+import { UserProvider } from "./pages/CreateContext";
 //npm install @fortawesome/fontawesome-free
 
 export default function Main() {
@@ -24,35 +25,28 @@ export default function Main() {
   console.log("userData", userData);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<GameLogIn />} />
-        <Route path="/Register" element={<GameRegister />} />
-        <Route path="/TokenGenerated/:Token" element={<TokenGenerated />} />
+    <UserProvider value={{ isAuthenticated, tokenUser }}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<GameLogIn />} />
+          <Route path="/Register" element={<GameRegister />} />
+          <Route path="/TokenGenerated/:Token" element={<TokenGenerated />} />
 
-        <Route
-          path="/Game/:Token"
-          element={
-            <ProtectedRoute isAuthenticated={isAuthenticated} userData={userData} token={tokenUser}>
-              <GameCanvas />
-            </ProtectedRoute>
-          }
-        >
-          <Route path="Shop" element={<GameShop />} />
-          <Route path="TaskAdd" element={<TaskAdd />} />
-          <Route path="Details/:idTask" element={<TaskDetailsView />} />
-        </Route>
-
-        {/* <Route
-          path="/practica/:Token"
-          element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <GameCanvas />
-            </ProtectedRoute>
-          }
-        /> */}
-      </Routes>
-    </BrowserRouter>
+          <Route
+            path="/Game"
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated} userData={userData} token={tokenUser}>
+                <GameCanvas />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="Shop" element={<GameShop />} />
+            <Route path="TaskAdd" element={<TaskAdd />} />
+            <Route path="Details/:idTask" element={<TaskDetailsView />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </UserProvider>
   );
 }
 

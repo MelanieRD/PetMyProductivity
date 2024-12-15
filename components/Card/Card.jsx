@@ -1,6 +1,12 @@
+import { use } from "react";
 import "./Card.css";
+import { useUser } from "../../src/pages/CreateContext";
 
 export const Card = () => {
+  const contextData = useUser();
+  const petInfo = contextData.userData.pet;
+  console.log("contextData pero en el card", contextData);
+
   return (
     <>
       <div className="Card" id="Card">
@@ -10,8 +16,8 @@ export const Card = () => {
           </div>
 
           <div className="txtCard">
-            <h2>Pato the Cat</h2>
-            <h3>Lvl. 30</h3>
+            <h2>{petInfo.petName}</h2>
+            <h3>Lvl. {petInfo.petLevel}</h3>
             <input id="expInput" type="range" />
           </div>
         </div>

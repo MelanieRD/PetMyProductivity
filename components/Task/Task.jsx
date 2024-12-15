@@ -6,19 +6,32 @@ import { TextInput } from "../TextInput/TextInput";
 import { TaskC } from "../../server/classes/TaskClass";
 import { getTaskList, taskAdd } from "../../src/utils/utils";
 import { use } from "react";
+import { useUser } from "../../src/pages/CreateContext";
 
-export const Task = ({ token }) => {
+export const Task = () => {
+  const contextData = useUser();
+  const token = contextData?.tokenUser;
   const [isVisible, setisVisible] = useState(false);
   const [addVisible, setAddVisible] = useState(true);
   const [taskList, setTaskList] = useState([]);
 
   useEffect(() => {
+    if (!token) {
+      console.error("El token no está definido. Asegúrate de iniciar sesión.");
+      return;
+    }
+    console.log("Token definido en Task.jsx: " + token);
+
     handleTaskList();
-  }, []);
+  }, [token]);
 
   const handleTaskList = async () => {
-    const data = await getTaskList(token);
-    setTaskList(data.tasks);
+    try {
+      const data = await getTaskList(token);
+      setTaskList(data.tasks);
+    } catch (error) {
+      console.error("Error al obtener la lista de tareas", error);
+    }
   };
 
   const titleI = useRef("none");
