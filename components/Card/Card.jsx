@@ -5,7 +5,7 @@ import { useUser } from "../../src/pages/CreateContext";
 export const Card = () => {
   const contextData = useUser();
   const petInfo = contextData.userData.pet;
-  console.log("contextData pero en el card", contextData);
+  //console.log("contextData pero en el card", contextData);
 
   return (
     <>

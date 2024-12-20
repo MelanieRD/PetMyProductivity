@@ -20,7 +20,7 @@ const wall = new Image();
 wall.src = "../../src/assets/House/Walls/yellowWall.png";
 //--------------------------------------------------------------------------------------------
 export const UsePetAnimation = ({ canvasR }) => {
-  const { openMouth, petEating } = usePetAnimationCtx();
+  const { openMouth, petEating, handlePetEating } = usePetAnimationCtx();
   //const [openMouth, setOpenMouth] = useState(false);
 
   //useEffect(() => {}, [openMouth]);
@@ -86,9 +86,10 @@ export const UsePetAnimation = ({ canvasR }) => {
         } else if (animationChanger >= 1 && openMouth == true) {
           currentAnimationObj = animations[3];
           animationChanger = 0;
-        } else if (animationChanger >= 1 && petEating == true) {
+        } else if (animationChanger >= 2 && petEating == true) {
           currentAnimationObj = animations[randomNum()];
           animationChanger = 0;
+          handlePetEating();
         }
       }
 

@@ -38,7 +38,7 @@ export const handlePetLogIng = async (token) => {
       return null;
     }
     const data = await response.json();
-    console.log("Mascota obtenida:", data);
+    // console.log("Mascota obtenida:", data);
     return data;
   } catch (error) {
     console.error("Error al obtener la mascota", error);

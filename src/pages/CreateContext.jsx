@@ -15,7 +15,7 @@ export const UserProvider = ({ children, value }) => {
     const tokenC = Cookies.get("tokenUser");
     const user = Cookies.get("userData");
 
-    console.log("Desde las cookies" + tokenC + " " + user);
+    //console.log("Desde las cookies" + tokenC + " " + user);
     if (tokenC && user) {
       setIsAuthenticated(true);
       setTokenUser(tokenC);

@@ -25,4 +25,8 @@ router.use("/counter", counterRoute);
 const shopRoute = require("./shopRoute");
 router.use("/shop", shopRoute);
 
+//Inventory
+const inventoryRoute = require("./inventoryRoute");
+router.use("/inventory", inventoryRoute);
+
 module.exports = router;

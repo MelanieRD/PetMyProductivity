@@ -2,6 +2,7 @@ import { use, useEffect, useState } from "react";
 import "./Shop.css";
 import { useUser } from "../../src/pages/CreateContext";
 import { handleGetListByType, handleGetListItems } from "../../src/utils/utilsForShop";
+import { ItemShop } from "./ItemShop/itemShop";
 
 export const Shop = () => {
   const contextData = useUser();
@@ -39,10 +40,6 @@ export const Shop = () => {
     });
 
     setCurrentListItems(currentItemListC);
-  };
-
-  const handleDetailItem = () => {
-    console.log("Cliqueaste un item: Detail Item");
   };
 
   const handleOptionsList = (option) => {
@@ -85,17 +82,7 @@ export const Shop = () => {
           <div className="itemListC">
             <div className="itemList">
               {currentListItem.map((item, index) => (
-                <div key={item._id || index} className="item">
-                  <div className="topItem" onClick={handleDetailItem}>
-                    <li className="productName">{item.name}</li>
-                    <img src={"../../src/assets/Shop/" + item.img} className="productImage" alt={item.name} />
-                  </div>
-
-                  <div className="menuItem">
-                    <li className="buyItem mIBtn">Buy</li>
-                    <li className="equipItem mIBtn">Equip</li>
-                  </div>
-                </div>
+                <ItemShop key={item._id || index} item={item} />
               ))}
             </div>
           </div>

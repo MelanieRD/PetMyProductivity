@@ -7,6 +7,8 @@ import { useRef, useState } from "react";
 import User from "../../server/classes/User";
 import { petTokenGenerator } from "../utils/PetTokenGenerator";
 import { TasksC } from "../../server/classes/TaskClass";
+import { createInventory } from "../utils/utilsInventory";
+import { Inventory } from "../../server/classes/InventoryClass";
 
 export const GameRegister = () => {
   const navigate = useNavigate();
@@ -20,6 +22,11 @@ export const GameRegister = () => {
     console.log(newUser._id);
     const created = await handleCreateNewPet(newUser);
     const tasksRegistered = await taskCreate(newTaskRegistro);
+
+    // Create inventory
+    const newInventory = new Inventory(token);
+    const userInventory = await createInventory(newInventory);
+
     if (created) {
       navigate("/TokenGenerated/" + token);
     }

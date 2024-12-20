@@ -24,9 +24,9 @@ const GameCanvas = ({}) => {
 
   // Datos de contextos
   const { pet } = contextData.userData;
-  const { openMouth, petEating, handlePetMouthOpen, handlePetEating } = usePetAnimationCtx();
+  const { openMouth, petEating, handlePetMouthOpen, handlePetEating, handleDropCorrectly } = usePetAnimationCtx();
 
-  console.log("Intentando acceder al contextData " + JSON.stringify(contextData.userData));
+  //console.log("Intentando acceder al contextData " + JSON.stringify(contextData.userData));
 
   const Token = contextData.userData._id;
 
@@ -34,18 +34,13 @@ const GameCanvas = ({}) => {
     ev.preventDefault();
     const data = ev.dataTransfer.getData("text");
     console.log("Data: " + data);
-    ev.target.appendChild(document.getElementById(data));
+    handleDropCorrectly();
+
+    //ev.target.appendChild(document.getElementById(data));
   };
 
   const handleDragOver = (ev) => {
     ev.preventDefault(); //allowDrop
-    handleEating();
-  };
-
-  const handleEating = () => {
-    console.log("openMouth: " + openMouth + " petEating: " + petEating);
-    handlePetMouthOpen();
-    handlePetEating();
   };
 
   return (

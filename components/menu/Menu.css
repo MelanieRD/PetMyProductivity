@@ -32,9 +32,30 @@
   display: none;
 
   width: 400px;
-  height: 70px;
+  height: 90px;
   border-radius: 30px;
+
+  overflow: auto;
 }
+
+.inventorySubMenu {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-items: space-between;
+}
+
+.inventorySubMenu img {
+  width: 50px;
+  height: 50px;
+}
+
+.itemInventory {
+  /* background-color: #e2a179; */
+  margin: 10px;
+}
+
 .dropdown-item:hover .submenu {
   display: block;
 }

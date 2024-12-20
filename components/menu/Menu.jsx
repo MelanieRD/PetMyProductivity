@@ -3,13 +3,32 @@ import "./Menu.css";
 import { usePetAnimationCtx } from "../../src/assets/Contexts/PetAnimationContext";
 
 export const Menu = () => {
-  const { openMouth, handlePetMouthOpen, handlePetEating } = usePetAnimationCtx();
+  const { dropCorrectly, handleDropCorrectly, openMouth, petEating, handlePetMouthOpen, handlePetEating } = usePetAnimationCtx();
 
   const handlePetMouthO = (ev) => {
     ev.dataTransfer.setData("text", ev.target.id);
     handlePetMouthOpen();
 
     console.log("openMouth al dragStart: " + openMouth);
+    console.log("petEating al dragStart: " + petEating);
+  };
+
+  const handleDragEnd = (ev) => {
+    console.log("DragEnd");
+
+    if (dropCorrectly) {
+      ev.target.remove();
+      handleEating();
+      handleDropCorrectly();
+    } else {
+      handlePetMouthOpen();
+    }
+  };
+
+  const handleEating = () => {
+    console.log("openMouth: " + openMouth + " petEating: " + petEating);
+    handlePetMouthOpen();
+    handlePetEating();
   };
 
   return (
@@ -20,8 +39,41 @@ export const Menu = () => {
           <li className="dropdown-item">
             Inventory
             <ul className="submenu">
-              <li>Inventory Items here</li>
-              <img src="../../src/assets/Shop/chiken.png" id="drag1" alt="chiken" draggable="true" onDragStart={handlePetMouthO} />
+              <div className="inventorySubMenu">
+                <div className="itemInventory" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd}>
+                  <img src="../../src/assets/Shop/chiken.png" alt="chiken" id="chikeeeen" />
+                </div>
+
+                <div className="itemInventory" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd}>
+                  <img src="../../src/assets/Shop/chiken.png" alt="chiken" />
+                </div>
+
+                <div className="itemInventory" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd}>
+                  <img src="../../src/assets/Shop/chiken.png" alt="chiken" />
+                </div>
+
+                <div className="itemInventory" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd}>
+                  <img src="../../src/assets/Shop/chiken.png" alt="chiken" />
+                </div>
+
+                <div className="itemInventory" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd}>
+                  <img src="../../src/assets/Shop/chiken.png" alt="chiken" />
+                </div>
+
+                <div className="itemInventory" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd}>
+                  <img src="../../src/assets/Shop/chiken.png" alt="chiken" />
+                </div>
+
+                <div className="itemInventory" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd}>
+                  <img src="../../src/assets/Shop/chiken.png" alt="chiken" />
+                </div>
+
+                <div className="itemInventory" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd}>
+                  <img src="../../src/assets/Shop/chiken.png" alt="chiken" />
+                </div>
+
+                {/* <img src="../../src/assets/Shop/chiken.png" id="drag1" alt="chiken" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd} /> */}
+              </div>
             </ul>
           </li>
           <Link to="Shop">
