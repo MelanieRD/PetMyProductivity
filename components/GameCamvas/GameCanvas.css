@@ -11,6 +11,17 @@
   background-color: rgb(174, 223, 255);
 }
 
+.drop {
+  position: absolute;
+  /* background-color: #5f4d1b; */
+  border: solid 3px #5f4d1b;
+  height: 100px;
+  width: 100px;
+
+  top: 380px;
+  left: 620px;
+}
+
 .wrapper {
   display: flex;
   align-items: center;

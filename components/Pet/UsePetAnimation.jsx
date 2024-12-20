@@ -31,6 +31,7 @@ export const UsePetAnimation = ({ canvasR }) => {
 
     let currentAnimationObj;
     let animationChanger = 0;
+
     if (openMouth) {
       animationChanger = 0;
       console.log("openMouth True");
@@ -87,7 +88,6 @@ export const UsePetAnimation = ({ canvasR }) => {
           animationChanger = 0;
         } else if (animationChanger >= 1 && petEating == true) {
           currentAnimationObj = animations[randomNum()];
-
           animationChanger = 0;
         }
       }

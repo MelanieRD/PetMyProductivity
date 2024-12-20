@@ -3,15 +3,13 @@ import "./Menu.css";
 import { usePetAnimationCtx } from "../../src/assets/Contexts/PetAnimationContext";
 
 export const Menu = () => {
-  const { handlePetMouthOpen, handlePetEating } = usePetAnimationCtx();
+  const { openMouth, handlePetMouthOpen, handlePetEating } = usePetAnimationCtx();
 
-  const handlePetMouthO = () => {
+  const handlePetMouthO = (ev) => {
+    ev.dataTransfer.setData("text", ev.target.id);
     handlePetMouthOpen();
-  };
 
-  const handleEating = () => {
-    handlePetMouthOpen();
-    handlePetEating();
+    console.log("openMouth al dragStart: " + openMouth);
   };
 
   return (
@@ -23,7 +21,7 @@ export const Menu = () => {
             Inventory
             <ul className="submenu">
               <li>Inventory Items here</li>
-              <img src="../../src/assets/Shop/chiken.png" alt="chiken" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleEating} />
+              <img src="../../src/assets/Shop/chiken.png" id="drag1" alt="chiken" draggable="true" onDragStart={handlePetMouthO} />
             </ul>
           </li>
           <Link to="Shop">
