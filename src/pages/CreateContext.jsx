@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { handleGetListItems } from "../utils/utilsForShop";
 
 const UserContext = createContext();
 
@@ -8,6 +9,7 @@ export const UserProvider = ({ children, value }) => {
   const [tokenUser, setTokenUser] = useState(value?.tokenUser || null);
   const [userData, setUserData] = useState(value?.userData || {});
   const [isLoading, setIsLoading] = useState(true);
+  const [shopList, setShopList] = useState([]);
 
   useEffect(() => {
     const tokenC = Cookies.get("tokenUser");
@@ -21,6 +23,8 @@ export const UserProvider = ({ children, value }) => {
     }
 
     setIsLoading(false); // Finaliza la carga después de procesar cookies
+
+    getShopList();
   }, []);
 
   const updateUser = (auth, token, data) => {
@@ -37,7 +41,13 @@ export const UserProvider = ({ children, value }) => {
     }
   };
 
-  return <UserContext.Provider value={{ isAuthenticated, tokenUser, userData, updateUser }}>{children}</UserContext.Provider>;
+  const getShopList = () => {
+    handleGetListItems().then((data) => {
+      setShopList(data);
+    });
+  };
+
+  return <UserContext.Provider value={{ isAuthenticated, tokenUser, userData, updateUser, shopList }}>{children}</UserContext.Provider>;
 };
 
 export const useUser = () => useContext(UserContext);

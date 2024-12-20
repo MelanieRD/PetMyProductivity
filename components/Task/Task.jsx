@@ -75,6 +75,14 @@ export const Task = () => {
     setAddVisible(!addVisible);
   };
 
+  const handleDoneTask = (task) => {
+    if (task.status === "To Do") {
+      console.log("Tarea no completada" + task._id);
+    } else if (task.status === "Done") {
+      console.log("Tarea completada" + task._id);
+    }
+  };
+
   return (
     <>
       <div className={`taskContainer ${isVisible ? "visible" : "hidden"}`} id="taskContainer">

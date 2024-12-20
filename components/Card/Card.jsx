@@ -17,7 +17,7 @@ export const Card = () => {
 
           <div className="txtCard">
             <h2>{petInfo.petName}</h2>
-            <h3>Lvl. {petInfo.petLevel}</h3>
+            <h3>Lvl. {petInfo.petLevel / 1000}</h3>
             <input id="expInput" type="range" />
           </div>
         </div>

@@ -37,6 +37,45 @@ const createTask = async (req, res) => {
   }
 };
 
+const modifyTaskStatus = async (req, res) => {
+  try {
+    const db = await mongoDBConection();
+    const taskID = parseInt(req.params.taskID);
+    const taskStatus = req.body.status;
+    const userID = req.params.userID;
+
+    const result = await db.collection("tasks").updateOne({ userID: userID, "tasks._id": taskID }, { $set: { "tasks.$.status": taskStatus } });
+
+    if (taskStatus === "Done") {
+      // Obtener el valor del reward XP
+      const task = await db.collection("tasks").findOne({ userID: userID, "tasks._id": taskID }, { projection: { "tasks.$": 1 } });
+
+      const xpReward = task.tasks[0].taskRewards.find((reward) => reward.type === "XP").amount;
+      const goldReward = task.tasks[0].taskRewards.find((reward) => reward.type === "Gold").amount;
+
+      const rewardsUpdate = await db
+        .collection("tasks")
+        .updateOne(
+          { userID: userID, "tasks._id": taskID },
+          { $set: { "tasks.$[task].taskRewards.$[xpReward].amount": 0, "tasks.$[task].taskRewards.$[goldReward].amount": 0 } },
+          { arrayFilters: [{ "task._id": taskID }, { "xpReward.type": "XP" }, { "goldReward.type": "Gold" }] }
+        );
+
+      const lvlupdate = await db.collection("<UserTry>").updateOne({ _id: userID }, { $inc: { "pet.petLevel": xpReward, coins: goldReward } });
+    }
+
+    if (result.modifiedCount === 0) {
+      return res.status(404).json({ error: "Tarea no encontrada" });
+    }
+    res.status(200).json({ message: "Tarea modificada" });
+  } catch (error) {
+    console.error("Error al modificar la tarea" + error);
+    res.status(500).json({ error: "Error al modificar la tarea" });
+  } finally {
+    closeMongoDBconection();
+  }
+};
+
 const updateTask = async (req, res) => {
   const db = await mongoDBConection();
   const task = await db.collection("tasks").findOne({ userID: req.params.id });
@@ -91,4 +130,4 @@ const deleteTask = async (req, res) => {
   }
 };
 
-module.exports = { getAllTasks, getTaskById, createTask, updateTask, deleteTask };
+module.exports = { getAllTasks, getTaskById, createTask, updateTask, modifyTaskStatus, deleteTask };

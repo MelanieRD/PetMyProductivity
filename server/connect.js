@@ -24,11 +24,11 @@ app.listen(PORT, () => {
  *
  * 1. Hacer el Api             <--------------------/// Ready
  * 2. Conectar a MongoDB               <--------------------/// Ready
- * 3. Hacer uso de dotnev para ocultar la cadena de conexion
- * 4. Hacer el modelo de User
- * 5. Hacer el Controllador de User
- * 6. Hacer el Routing de User
- * 7. Generar Token se user
+ * 3. Hacer uso de dotnev para ocultar la cadena de conexion  <--------------------/// Ready
+ * 4. Hacer el modelo de User  <--------------------/// Ready
+ * 5. Hacer el Controllador de User  <--------------------/// Ready
+ * 6. Hacer el Routing de User  <--------------------/// Ready
+ * 7. Generar Token se user  <--------------------/// Ready
  *
  *
  *

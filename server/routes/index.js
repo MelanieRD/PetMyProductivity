@@ -21,4 +21,8 @@ router.use("/tasks", taskRoute);
 const counterRoute = require("./counterRoute");
 router.use("/counter", counterRoute);
 
+//Shop
+const shopRoute = require("./shopRoute");
+router.use("/shop", shopRoute);
+
 module.exports = router;

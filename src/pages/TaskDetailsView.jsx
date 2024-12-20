@@ -10,7 +10,7 @@ export const TaskDetailsView = () => {
 
   return (
     <>
-      <Window content={<FullTaskDetail />} newRoute={"/Game/" + token} />
+      <Window content={<FullTaskDetail />} newRoute={"/Game"} />
     </>
   );
 };

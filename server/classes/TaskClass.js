@@ -20,15 +20,15 @@ class TaskC {
     this.taskRewards = [
       {
         type: "XP",
-        amount: 0,
+        amount: 100,
       },
       {
         type: "Gold",
-        amount: 0,
+        amount: 100,
       },
       {
         type: "Item",
-        amount: 0,
+        amount: 100,
       },
     ];
   }

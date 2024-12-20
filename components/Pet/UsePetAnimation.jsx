@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { PetAnimation } from "./PetAnimation_class";
 import { useCanvas } from "../../src/hooks/useCanvas";
+import { usePetAnimationCtx } from "../../src/assets/Contexts/PetAnimationContext";
 
 const ruta = "../../src/assets/Pets/Cat/SpriteSheets/";
 const IdleAnimationObj = new PetAnimation(`${ruta}CatIdle.png`, 523, 574, 25); // este es mi objeto creado;
@@ -19,15 +20,32 @@ const wall = new Image();
 wall.src = "../../src/assets/House/Walls/yellowWall.png";
 //--------------------------------------------------------------------------------------------
 export const UsePetAnimation = ({ canvasR }) => {
+  const { openMouth, petEating } = usePetAnimationCtx();
+  //const [openMouth, setOpenMouth] = useState(false);
+
+  //useEffect(() => {}, [openMouth]);
+
   useCanvas(canvasR, (canvas, ctx) => {
     const Canvas_Width = (canvas.width = 1400);
     const Canvas_Height = (canvas.height = 800);
 
-    let currentAnimationObj = animations[0];
+    let currentAnimationObj;
+    let animationChanger = 0;
+    if (openMouth) {
+      animationChanger = 0;
+      console.log("openMouth True");
+      currentAnimationObj = animations[2];
+    } else if (petEating) {
+      console.log("petEating True");
+      animationChanger = 0;
+      currentAnimationObj = animations[4];
+    } else {
+      currentAnimationObj = animations[0];
+    }
 
     let frameX = 0;
     let gameFrame = 0;
-    let animationChanger = 0;
+
     const divisorGameFrame = 1.5;
 
     const randomNum = () => {
@@ -61,8 +79,15 @@ export const UsePetAnimation = ({ canvasR }) => {
           animationChanger++;
         }
 
-        if (animationChanger >= 5) {
+        if (animationChanger >= 5 && openMouth == false) {
           currentAnimationObj = animations[randomNum()];
+          animationChanger = 0;
+        } else if (animationChanger >= 1 && openMouth == true) {
+          currentAnimationObj = animations[3];
+          animationChanger = 0;
+        } else if (animationChanger >= 1 && petEating == true) {
+          currentAnimationObj = animations[randomNum()];
+
           animationChanger = 0;
         }
       }

@@ -89,6 +89,28 @@ export const taskAdd = async (userID, updateAddTask) => {
   }
 };
 
+export const taskModifyStatus = async (userID, taskID, newStatus) => {
+  console.log("userID: ", userID);
+  console.log("taskID: ", taskID);
+  try {
+    const response = await fetch(`http://localhost:3000/app/tasks/${userID}/${taskID}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: newStatus }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Error al modify task");
+    }
+
+    const data = await response.json();
+    console.log("Tarea modificada:", data);
+    return true;
+  } catch (error) {
+    console.error("error  al delete Tarea " + error);
+  }
+};
+
 export const taskDelete = async (userID, taskID) => {
   console.log("userID: ", userID);
   console.log("taskID: ", taskID);

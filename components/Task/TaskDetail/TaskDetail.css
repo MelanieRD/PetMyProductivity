@@ -11,6 +11,14 @@
   margin-left: 10px;
 }
 
+.disabled {
+  opacity: 0.5;
+}
+
+.disabled .titleTask {
+  text-decoration: line-through;
+}
+
 .Task:hover {
   background-color: rgba(221, 196, 166, 0.568);
   transition-duration: 0.4s;

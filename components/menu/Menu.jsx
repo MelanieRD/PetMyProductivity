@@ -1,7 +1,19 @@
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import "./Menu.css";
+import { usePetAnimationCtx } from "../../src/assets/Contexts/PetAnimationContext";
 
 export const Menu = () => {
+  const { handlePetMouthOpen, handlePetEating } = usePetAnimationCtx();
+
+  const handlePetMouthO = () => {
+    handlePetMouthOpen();
+  };
+
+  const handleEating = () => {
+    handlePetMouthOpen();
+    handlePetEating();
+  };
+
   return (
     <>
       <Outlet />
@@ -11,6 +23,7 @@ export const Menu = () => {
             Inventory
             <ul className="submenu">
               <li>Inventory Items here</li>
+              <img src="../../src/assets/Shop/chiken.png" alt="chiken" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleEating} />
             </ul>
           </li>
           <Link to="Shop">

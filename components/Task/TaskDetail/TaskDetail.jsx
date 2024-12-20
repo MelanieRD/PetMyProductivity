@@ -1,13 +1,37 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import "./TaskDetail.css";
-import { taskDelete } from "../../../src/utils/utils";
+import { taskAdd, taskDelete, taskModifyStatus } from "../../../src/utils/utils";
 
 // https://docs.fontawesome.com/web/use-with/react Iconos REACT
-export const TaskDetail = ({ task, TokenUser, handleTaskList }) => {
+export const TaskDetail = ({ task, TokenUser, handleTaskList, done }) => {
   const idTask = useRef("null");
   const [isButtonDisabled, setIsButtonDisabled] = useState("false");
   const [detail, setDetail] = useState("false");
+  const [Checked, setChecked] = useState(false);
+
+  const handleCheckboxChange = async (event) => {
+    if (task.status !== "Done") {
+      try {
+        await taskModifyStatus(TokenUser, task._id, "Done");
+        handleTaskList();
+      } catch (error) {
+        console.error("Error al actualizar la tarea", error);
+      }
+    } else {
+      try {
+        await taskModifyStatus(TokenUser, task._id, "To Do");
+        handleTaskList();
+      } catch (error) {
+        console.error("Error al actualizar la tarea", error);
+      }
+    }
+
+    setIsButtonDisabled(false);
+
+    console.log("Tarea: task.status= " + task.status);
+    console.log("Tarea: " + task);
+  };
 
   const navigate = useNavigate();
 
@@ -45,13 +69,13 @@ export const TaskDetail = ({ task, TokenUser, handleTaskList }) => {
     <>
       <hr />
 
-      <div className="Task">
+      <div className={`Task ${task.status === "Done" ? "disabled" : ""}`}>
         <div className="headTask">
           <p ref={idTask} className="idTask">
             {task._id}
           </p>
           <label>
-            <input type="checkbox" name="CheckBox" /> <a className="titleTask">{task.title}</a>
+            <input type="checkbox" name="CheckBox" checked={task.status === "Done" ? true : false} onChange={handleCheckboxChange} /> <a className="titleTask">{task.title}</a>
           </label>
 
           <div className="iconsDiv">
@@ -67,7 +91,9 @@ export const TaskDetail = ({ task, TokenUser, handleTaskList }) => {
 
         <div className="infoCoin">
           <img src="" alt="" />
-          <p> Coins: 100</p>
+          <p> Coins: {task.taskRewards.find((reward) => reward.type === "Gold").amount}</p>
+          <p> Xp: {task.taskRewards.find((reward) => reward.type === "XP").amount}</p>
+          <p>{task.status}</p>
         </div>
 
         <div className="detailsbtn" onClick={handleTaskDetail}>

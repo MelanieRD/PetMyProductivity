@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useAuth = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userData, setUserData] = useState(null);
   const [tokenUser, setTokenUser] = useState(null);
 

@@ -27,14 +27,6 @@ const GameCanvas = ({}) => {
   console.log("Intentando acceder al contextData " + JSON.stringify(contextData.userData));
 
   const Token = contextData.userData._id;
-  //JSON.stringify(contextData?.tokenUser);
-
-  // console.log("En la vista game, este es el token: " + Token + "mandado por el parent con use context:" + JSON.stringify(userData));
-
-  // Acceder a petFindedToken desde userData
-  // const petFindedToken = userData?.petFindedToken;
-  // console.log("petFindedToken:", petFindedToken);
-  // console.log("tokenUser:", token);
 
   return (
     <>
@@ -47,8 +39,6 @@ const GameCanvas = ({}) => {
 
           <canvas className="canvas1" ref={canvasRef}></canvas>
           <Task />
-
-          {/* Window shop, customize, calendar, and more, I guess idk */}
         </div>
 
         <Menu />
