@@ -18,8 +18,8 @@ const useAuth = () => {
           setIsAuthenticated(true);
           setUserData(data.user); // Guarda los datos del usuario
           setTokenUser(data.user.petFindedToken);
-          console.log("Usuario autenticado con el hook:", data.user);
-          console.log("TOKEN", data.user.petFindedToken);
+          // console.log("Usuario autenticado con el hook:", data.user);
+          //   console.log("TOKEN", data.user.petFindedToken);
         } else {
           setIsAuthenticated(false);
         }

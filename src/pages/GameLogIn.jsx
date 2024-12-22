@@ -22,7 +22,7 @@ export const GameLogIn = () => {
       return;
     }
 
-    console.log("dataaaaaaaaa en gamelogin", data?.pet);
+    // console.log("dataaaaaaaaa en gamelogin", data?.pet);
 
     if (data?.pet) {
       // Actualiza el contexto con los datos del usuario

@@ -41,6 +41,8 @@ const authenticateToken = (req, res, next) => {
     next(); // Pasa al siguiente middleware/controlador
   } catch (error) {
     return res.status(401).json({ error: "Invalid or expired token" });
+  } finally {
+    closeMongoDBconection();
   }
 };
 
@@ -82,6 +84,8 @@ const postUser = async (req, res) => {
     res.status(200).send(newUser);
   } catch (error) {
     res.status(500).send({ error: "error al insertar usuario, " + error });
+  } finally {
+    closeMongoDBconection();
   }
 };
 

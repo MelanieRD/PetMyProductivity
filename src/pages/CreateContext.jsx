@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { handleGetListItems } from "../utils/utilsForShop";
+import { handleGetListItems, handleGetShopListItemsUser } from "../utils/utilsForShop";
 
 const UserContext = createContext();
 
@@ -9,7 +9,7 @@ export const UserProvider = ({ children, value }) => {
   const [tokenUser, setTokenUser] = useState(value?.tokenUser || null);
   const [userData, setUserData] = useState(value?.userData || {});
   const [isLoading, setIsLoading] = useState(true);
-  const [shopList, setShopList] = useState([]);
+  const [shopListUser, setShopListUser] = useState([]);
 
   useEffect(() => {
     const tokenC = Cookies.get("tokenUser");
@@ -23,14 +23,13 @@ export const UserProvider = ({ children, value }) => {
     }
 
     setIsLoading(false); // Finaliza la carga después de procesar cookies
-
-    getShopList();
   }, []);
 
   const updateUser = (auth, token, data) => {
     setIsAuthenticated(auth);
     setTokenUser(token);
     setUserData(data);
+    getShopUser(token);
 
     if (auth) {
       Cookies.set("tokenUser", token, { expires: 7 });
@@ -41,13 +40,27 @@ export const UserProvider = ({ children, value }) => {
     }
   };
 
-  const getShopList = () => {
-    handleGetListItems().then((data) => {
-      setShopList(data);
+  const getShopUser = async (token) => {
+    // console.log("el tokeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeen:" + token);
+    try {
+      const data = await handleGetShopListItemsUser(token);
+      setShopListUser(data);
+    } catch (error) {
+      console.error("Error al obtener la lista de la tienda", error);
+    }
+
+    console.log("get ejecutado ShopListUser: " + shopListUser);
+  };
+
+  const updateInventory = (updatedItems) => {
+    setShopListUser((prevShopListUser) => {
+      const newShopListUser = [...prevShopListUser];
+      newShopListUser[0].items = updatedItems;
+      return newShopListUser;
     });
   };
 
-  return <UserContext.Provider value={{ isAuthenticated, tokenUser, userData, updateUser, shopList }}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{ isAuthenticated, tokenUser, userData, updateUser, shopListUser, getShopUser, updateInventory }}>{children}</UserContext.Provider>;
 };
 
 export const useUser = () => useContext(UserContext);

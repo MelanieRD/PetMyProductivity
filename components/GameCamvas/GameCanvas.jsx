@@ -11,6 +11,7 @@ import { Window } from "../Window/Window";
 import { useParams } from "react-router-dom";
 import { useUser } from "../../src/pages/CreateContext";
 import { usePetAnimationCtx } from "../../src/assets/Contexts/PetAnimationContext";
+import { handlequantityItem } from "../../src/utils/utilsForShop";
 
 const GameCanvas = ({}) => {
   //const { tokenT, setTokenT } = useContext(TokenContext);
@@ -25,18 +26,32 @@ const GameCanvas = ({}) => {
   // Datos de contextos
   const { pet } = contextData.userData;
   const { openMouth, petEating, handlePetMouthOpen, handlePetEating, handleDropCorrectly } = usePetAnimationCtx();
+  const shopList = contextData.shopListUser[0].items;
 
   //console.log("Intentando acceder al contextData " + JSON.stringify(contextData.userData));
 
   const Token = contextData.userData._id;
 
-  const handleDrop = (ev) => {
+  const handleDrop = async (ev) => {
     ev.preventDefault();
-    const data = ev.dataTransfer.getData("text");
-    console.log("Data: " + data);
-    handleDropCorrectly();
+    const itemData = JSON.parse(ev.dataTransfer.getData("application/json"));
+    console.log("Dataaaaaaaa de comida: " + itemData.quantity);
+    await handlequantityItem(itemData, Token);
 
     //ev.target.appendChild(document.getElementById(data));
+    handleDropCorrectly();
+
+    console.log("el iteeeeeeeeeeeeeeeeeeeeeem es:" + itemData);
+
+    // Restar quantity del item
+    const updatedItems = shopList.map((item) => {
+      if (item._id === itemData._id) {
+        return { ...item, quantity: item.quantity - 1 };
+      }
+      return item;
+    });
+
+    contextData.updateInventory(updatedItems);
   };
 
   const handleDragOver = (ev) => {

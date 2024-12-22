@@ -9,6 +9,7 @@ import { petTokenGenerator } from "../utils/PetTokenGenerator";
 import { TasksC } from "../../server/classes/TaskClass";
 import { createInventory } from "../utils/utilsInventory";
 import { Inventory } from "../../server/classes/InventoryClass";
+import { handleCreateShopForUser } from "../utils/utilsForShop";
 
 export const GameRegister = () => {
   const navigate = useNavigate();
@@ -26,6 +27,9 @@ export const GameRegister = () => {
     // Create inventory
     const newInventory = new Inventory(token);
     const userInventory = await createInventory(newInventory);
+
+    // Create Shop for user
+    const shopCreated = await handleCreateShopForUser(token);
 
     if (created) {
       navigate("/TokenGenerated/" + token);

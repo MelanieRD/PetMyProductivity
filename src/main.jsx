@@ -24,7 +24,7 @@ import { PetAnimationProvider } from "./assets/Contexts/PetAnimationContext";
 export default function Main() {
   const { isAuthenticated, userData, tokenUser } = useAuth();
   console.log("isAuthenticated", isAuthenticated);
-  console.log("userData", userData);
+  //console.log("userData", userData);
 
   return (
     <UserProvider value={{ isAuthenticated, tokenUser }}>

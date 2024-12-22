@@ -133,7 +133,7 @@ export const taskDelete = async (userID, taskID) => {
 
 export const getTaskList = async (token) => {
   try {
-    console.log("http://localhost:3000/app/tasks/ " + token);
+    // console.log("http://localhost:3000/app/tasks/ " + token);
     const response = await fetch(`http://localhost:3000/app/tasks/${token}`);
     if (!response.ok) {
       throw new Error("Error al obtener las tareas");

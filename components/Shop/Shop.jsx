@@ -12,22 +12,27 @@ export const Shop = () => {
   }
 
   const user = contextData.userData;
-  const shopList = contextData.shopList;
-  const [listItem, setListItem] = useState([]);
+  const shopList = contextData.shopListUser[0].items; // shopList
+  const [userCoins, setUserCoins] = useState(user.coins);
 
+  //console.log("Intentando acceder al contextData " + JSON.stringify(contextData.shopListUser));
   //console.log("Intentando acceder al contextData " + JSON.stringify(shopList));
+  //console.log("Intentando acceder al contextData " + shopList[0].items);
   // console.log("Shop" + JSON.stringify(contextData.userData));
 
   const [currentListItem, setCurrentListItems] = useState([]);
   const [activeItem, setActiveItem] = useState("Food");
 
   useEffect(() => {
-    setListItem(JSON.stringify(shopList));
     // console.log("List Items: " + listItem);
     // handleCurrentListItems(typeItem);
 
     handleCurrentListItems(activeItem);
-  }, []);
+  }, [activeItem]);
+
+  const updateUserCoins = (newCoins) => {
+    setUserCoins(newCoins);
+  };
 
   const handleCurrentListItems = (activeItem) => {
     setCurrentListItems([]);
@@ -46,6 +51,7 @@ export const Shop = () => {
     setActiveItem(option);
     handleCurrentListItems(option);
   };
+
   return (
     <>
       <div className="border"></div>
@@ -53,7 +59,7 @@ export const Shop = () => {
         <div className="SearchBar">
           <div className="shopLabel">
             <li className="shopLabel titleShop">Shop</li>
-            <li className="shopLabel coinShop">Coins: {user.coins} </li>
+            <li className="shopLabel coinShop">Coins: {userCoins} </li>
           </div>
 
           <li className={activeItem === "Food" ? "shopOption active" : "shopOption"} onClick={() => handleOptionsList("Food")}>
@@ -82,7 +88,7 @@ export const Shop = () => {
           <div className="itemListC">
             <div className="itemList">
               {currentListItem.map((item, index) => (
-                <ItemShop key={item._id || index} item={item} />
+                <ItemShop key={item._id || index} item={item} coins={userCoins} updateUserCoins={updateUserCoins} />
               ))}
             </div>
           </div>

@@ -20,7 +20,7 @@ export const Task = () => {
       console.error("El token no está definido. Asegúrate de iniciar sesión.");
       return;
     }
-    console.log("Token definido en Task.jsx: " + token);
+    //  console.log("Token definido en Task.jsx: " + token);
 
     handleTaskList();
   }, [token]);

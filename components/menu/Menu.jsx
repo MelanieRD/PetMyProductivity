@@ -1,12 +1,29 @@
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import "./Menu.css";
 import { usePetAnimationCtx } from "../../src/assets/Contexts/PetAnimationContext";
+import { handleCreateShopForUser } from "../../src/utils/utilsForShop";
+import { InventoryItem } from "./inventoryItem";
+
+import { use, useEffect } from "react";
+import { useUser } from "../../src/pages/CreateContext";
 
 export const Menu = () => {
   const { dropCorrectly, handleDropCorrectly, openMouth, petEating, handlePetMouthOpen, handlePetEating } = usePetAnimationCtx();
 
-  const handlePetMouthO = (ev) => {
-    ev.dataTransfer.setData("text", ev.target.id);
+  const contextData = useUser();
+
+  if (!contextData.userData || !contextData.userData || contextData.shopListUser.length === 0) {
+    return <div>Loading...</div>; // Mensaje de carga o contenido inicial
+  }
+  const user = contextData.userData;
+  const shopList = contextData.shopListUser[0].items;
+
+  //console.log("desde el inventory " + JSON.stringify(contextData.shopListUser[0].items));
+
+  const handlePetMouthO = (ev, item) => {
+    //Drag Start
+
+    ev.dataTransfer.setData("application/json", JSON.stringify(item));
     handlePetMouthOpen();
 
     console.log("openMouth al dragStart: " + openMouth);
@@ -15,9 +32,8 @@ export const Menu = () => {
 
   const handleDragEnd = (ev) => {
     console.log("DragEnd");
-
     if (dropCorrectly) {
-      ev.target.remove();
+      // ev.target.remove();
       handleEating();
       handleDropCorrectly();
     } else {
@@ -40,39 +56,13 @@ export const Menu = () => {
             Inventory
             <ul className="submenu">
               <div className="inventorySubMenu">
-                <div className="itemInventory" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd}>
-                  <img src="../../src/assets/Shop/chiken.png" alt="chiken" id="chikeeeen" />
-                </div>
-
-                <div className="itemInventory" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd}>
-                  <img src="../../src/assets/Shop/chiken.png" alt="chiken" />
-                </div>
-
-                <div className="itemInventory" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd}>
-                  <img src="../../src/assets/Shop/chiken.png" alt="chiken" />
-                </div>
-
-                <div className="itemInventory" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd}>
-                  <img src="../../src/assets/Shop/chiken.png" alt="chiken" />
-                </div>
-
-                <div className="itemInventory" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd}>
-                  <img src="../../src/assets/Shop/chiken.png" alt="chiken" />
-                </div>
-
-                <div className="itemInventory" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd}>
-                  <img src="../../src/assets/Shop/chiken.png" alt="chiken" />
-                </div>
-
-                <div className="itemInventory" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd}>
-                  <img src="../../src/assets/Shop/chiken.png" alt="chiken" />
-                </div>
-
-                <div className="itemInventory" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd}>
-                  <img src="../../src/assets/Shop/chiken.png" alt="chiken" />
-                </div>
-
-                {/* <img src="../../src/assets/Shop/chiken.png" id="drag1" alt="chiken" draggable="true" onDragStart={handlePetMouthO} onDragEnd={handleDragEnd} /> */}
+                {shopList.map((item, index) => {
+                  if (item.type === "Food") {
+                    if (item.quantity > 0) {
+                      return <InventoryItem key={index} item={item} handlePetMouthO={handlePetMouthO} handleDragEnd={handleDragEnd} />;
+                    }
+                  }
+                })}
               </div>
             </ul>
           </li>
